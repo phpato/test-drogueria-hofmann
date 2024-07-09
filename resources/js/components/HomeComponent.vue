@@ -92,6 +92,7 @@
 
 <script>
 import axios from 'axios';
+import Swal from 'sweetalert2';
 
 export default {
   data() {
@@ -135,9 +136,19 @@ export default {
         };
         console.log('la info a enviar es: ', data);
         const response = await axios.post('http://localhost:8000/send_data', data);
-        console.log('la respone send_data es: ', response)
+        Swal.fire({
+            title: "Usuario enviado",
+            text: "Exito",
+            icon: "success"
+        });
+        this.modalOpen = false;
+        this.selectedUser = {};
       } catch (error) {
-        console.error('Error llamada endpoint get_code_users',error);
+        Swal.fire({
+            title: "Error",
+            text: "Ocurrio un error inesperado",
+            icon: "error"
+        });
       }
     },
     //formato moneda local
